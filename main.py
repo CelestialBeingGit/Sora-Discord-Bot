@@ -6,6 +6,8 @@ import sqlite3
 import asyncio
 import random
 import os
+from flask import Flask
+from threading import Thread
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 intents = discord.Intents.default()
@@ -268,4 +270,16 @@ async def books(ctx):
             embed.add_field(name=f"📖 {title_text}", value=value_text, inline=False)
         embed.set_footer(text="Powered by Chitai-Gorod")
         await ctx.send(embed=embed)
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Humanity will live forever"
+def run_web_server():
+    app.run(host='0.0.0.0', port=8080)
+def keep_alive():
+    t = Thread(target=run_web_server)
+    t.start()
+# Запуск веб-сервер перед запуском бота
+keep_alive()
 bot.run(os.getenv('DISCORD_TOKEN'))
