@@ -137,7 +137,7 @@ async def pomodoro(ctx, minutes: int):
 @bot.command(name="guide", description="Shows game guides.")
 async def guide(ctx):
     embed = discord.Embed(
-        description="[ZZZ Guides](https://protogamer.ru/games/102-zenless-zone-zero)",
+        description="[ZZZ Guides](https://vk.com/zzz_academy)",
         color=discord.Color.blue()
     )
     await ctx.send(embed=embed)
@@ -271,15 +271,13 @@ async def books(ctx):
         embed.set_footer(text="Powered by Chitai-Gorod")
         await ctx.send(embed=embed)
 app = Flask(__name__)
-
 @app.route('/')
 def home():
-    return "Humanity will live forever"
+    return "Humanity will live forever" 
 def run_web_server():
     app.run(host='0.0.0.0', port=8080)
 def keep_alive():
     t = Thread(target=run_web_server)
     t.start()
-# Запуск веб-сервер перед запуском бота
 keep_alive()
 bot.run(os.getenv('DISCORD_TOKEN'))
